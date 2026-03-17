@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    color: rgb(205, 205, 205);
+}
+
+body {
+    background: rgb(34, 34, 34);
+}
+
+#inputTasks {
+    display: flex;
+}
+
+fieldset {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 370px;
+    border: 1px dashed rgb(205, 205, 205);
+    border-radius: 10px;
+}
+
+#taskDes {
+    height: 70px;
+    width: 200px;
+    text-align: start;
+    resize: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    padding-left: 10px;
+    padding-top: 5px;
+    color: rgb(34, 34, 34);
+    scrollbar-width: thin;
+}
+
+#datePicker {
+    height: 50px;
+    width: 150px;
+    color: rgb(34, 34, 34);
+    margin-left: 20px;
+}
+
+#submitB {
+    height: 70px;
+    width: 120px;
+    border-radius: 35px;
+    margin-top: 20px;
+    margin-left: 10px;
+    border: 2px solid rgb(205, 205, 205);
+    background-color: transparent;
+}
+
+#submitB:active {
+    background: rgb(10, 10, 10);
+}
+
+#tasks {
+    display: grid;
+    width: 600px;
+    border: 1px solid rgb(205, 205, 205);
+    grid-template-columns: 200px 200px 150px;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+    gap: 10px;
+}
+
+#tasks div {
+    border-right: 1px dashed rgb(205, 205, 205);
+    border-left: 1px dashed rgb(205, 205, 205);
+    padding: 10px;
+    width: calc(450px - 90px);
+}
+
+#tasks button {
+    padding: 5px;
+    border: 1px solid rgb(205, 205, 205);
+    height: 45px;
+    width: 70px;
+    border-radius: 25px;
+    margin-left: 0px;
+    background-color: transparent;
+}
+
+#tasks button:active {
+    background: rgb(93, 93, 93);
+}
+
+#bgMenu {
+    z-index: 10000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100vw;
+    background-color: rgb(214, 236, 255, 0.3);
+    border: 1px solid rgb(214, 236, 255);
+    border-left: none;
+    border-right: none;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    height: 40px;
+    top: 0;
+    left: 0px;
+    right: 0;
+    filter: blur(5);
+}
+
+#bgMenu a {
+    text-decoration: none;
+}
+
+#navigation {
+    z-index: 10000;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        border-radius: 6px;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        visibility: none;
+        transition: opacity 1s, visibility 1s;
+    }
+}
+
+#bgMenu:hover {
+    div:hover {
+        p {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
