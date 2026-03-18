@@ -197,17 +197,17 @@ body {
   padding: 0;
 }
 
-#imgCont .rightWing {
+#imgCont>.rightWing {
   transform: translateX(50vw);
   opacity: 0.05;
 }
 
-#imgCont .leftWing {
+#imgCont>.leftWing {
   transform: translateX(-50vw);
   opacity: 0.05;
 }
 
-#imgCont .backBone {
+#imgCont>.backBone {
   opacity: 0;
   position: absolute;
   top: 0;
@@ -215,7 +215,7 @@ body {
   left: 0;
 }
 
-#imgCont .facing {
+#imgCont>.facing {
   position: absolute;
   top: 0;
   right: 0;

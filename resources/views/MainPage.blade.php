@@ -1,4 +1,4 @@
-<x-layout title="Main Page" stylingsheet="resources/css/MainPage.css" JSsheet="resources/js/MainPage.js">
+<x-layout title="Main Page" stylingsheet="resources/css/MainPage.css" JSsheet='resources/js/MainPage.js'>
     <header id="imgFlex">
         <div id="bgLeftCont"></div>
         <div id="imgCont">

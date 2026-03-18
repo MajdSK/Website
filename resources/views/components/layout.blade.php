@@ -1,7 +1,7 @@
 @props([
   "title" => 'LARAVEL',
   "stylingsheet" => 'resources/css/app.css',
-  "JSsheet" => 'resources/js/app.js'
+  "JSsheet" => "resources/js/app.js"
 ])
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
   <title>{{ $title }}</title>
 
   <!-- Fonts -->
-  @vite([$stylingsheet, $JSsheet ])
+  @vite($stylingsheet, $JSsheet )
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                     </a>
             </nav>
         </div>
-  {{ $slot }}
+    {{ $slot }}
 </body>
 
 </html>

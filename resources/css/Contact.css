@@ -82,10 +82,10 @@
 
     .ql-toolbar {
       position: absolute;
-      top: 60px;
+      top: 58px;
       left: 350px;
       background-color: rgb(255, 255, 255, 0.5);
-      border: 2px solid black;
+      border: none;
       color: black;
       outline: none;
       width: 800px;
