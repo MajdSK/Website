@@ -14,7 +14,7 @@
   <title>{{ $title }}</title>
 
   <!-- Fonts -->
-  @vite($stylingsheet, $JSsheet )
+  @vite([$stylingsheet, $JSsheet])
 </head>
 
 <body>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>variables</title>
+    <title>Rock, Paper, Scissors</title>
     <style>
         * {
             box-sizing: border-box;
@@ -73,7 +73,8 @@
         #vs {
             font-size: 20px;
         }
-        .active{
+
+        .active {
             background: rgb(255, 255, 255);
             color: darkred;
             border: 1px dashed darkred;
@@ -238,9 +239,9 @@
     <script>
 
         let uW = 0,
-        cW = 0;
-        uW=localStorage.getItem("uW");
-        cW=localStorage.getItem("cW");
+            cW = 0;
+        uW = localStorage.getItem("uW");
+        cW = localStorage.getItem("cW");
         document.getElementById("dashBoard").innerHTML = `you ${uW} - ${cW} computer`;
         function startG(ua) {
             let uc = document.getElementById("userChoice");
@@ -295,8 +296,8 @@
                     uW++;
                 } else if (ca == 3) res.innerHTML += "tie";
             }
-            localStorage.setItem("uW" , uW);
-            localStorage.setItem("cW" ,cW);
+            localStorage.setItem("uW", uW);
+            localStorage.setItem("cW", cW);
             document.getElementById("dashBoard").innerHTML = `you ${uW} - ${cW} computer`;
             setTimeout(() => {
                 res.innerHTML = "";
@@ -307,20 +308,20 @@
         }
         let intervalId;
         function startAuto() {
-            if(document.querySelector(".autoB").classList.contains("active")) {
-                intervalId = setInterval(()=>{
+            if (document.querySelector(".autoB").classList.contains("active")) {
+                intervalId = setInterval(() => {
                     let uapa = Math.floor(Math.random() * (4 - 1) + 1);
                     if (uapa == 1) {
-                            startG("rock");
+                        startG("rock");
                     } else if (uapa == 2) {
                         startG("paper");
                     } else {
                         startG("scissors");
                     }
-                    },2000);
+                }, 2000);
             }
         }
-        
+
         function ssauto() {
             if (document.querySelector(".autoB").classList.contains("active")) {
                 document.querySelector(".autoB").innerHTML = "Auto play";
@@ -332,11 +333,11 @@
                 startAuto()
             }
         }
-        function resetScores(){
-            uW =0;
-            cW =0;
-            localStorage.setItem("uW" ,0);
-            localStorage.setItem("cW" ,0);
+        function resetScores() {
+            uW = 0;
+            cW = 0;
+            localStorage.setItem("uW", 0);
+            localStorage.setItem("cW", 0);
             document.getElementById("dashBoard").innerHTML = `you ${uW} - ${cW} computer`;
         }
     </script>
