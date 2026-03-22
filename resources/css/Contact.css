@@ -13,12 +13,10 @@
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
+      grid-template-areas: "sending""sent";
+      gap: 0;
       justify-items: center;
-      align-items: center;
-      row-gap: -20px;
       padding-top: 60px;
-      grid-template-areas: "sendingmessages"
-        "sentmessages";
     }
 
     #bgMenu {
@@ -78,6 +76,14 @@
       }
     }
 
+    #sendingCont {
+      grid-area: "sending";
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas: "editor""buttons";
+    }
+
     #container {
       height: 400px;
       width: 800px;
@@ -85,10 +91,11 @@
       background-color: rgb(255, 255, 255, 0.65);
       border-radius: 0 0 20px 20px;
       color: rgb(110, 0, 0);
+      grid-area: editor;
     }
 
-    #identifier {
-      grid-area: sendingmessages;
+    #buttonsCont {
+      grid-area: buttons;
     }
 
     .ql-editor * {
@@ -159,14 +166,15 @@
     }
 
     #savedMessages {
-      grid-area: sentbar;
+      margin-top: 0;
       display: block;
       border: 2px solid black;
       border-radius: 12px;
       background-color: rgb(255, 255, 255, 0.65);
       color: rgb(110, 0, 0);
-      padding: 0 10px 0 10px;
+      padding: 0 0 0 10px;
       width: 800px;
+      grid-area: sentbar;
     }
 
     #savedMessages ul {
@@ -175,24 +183,21 @@
 
     #savedMessages li {
       color: rgb(110, 0, 0);
-      max-width: 900px;
+      width: 900px;
       white-space: normal;
       overflow-wrap: break-word;
       word-wrap: break-word;
       margin-left: 0;
-      margin-top: 10px;
+      margin-top: 0;
       list-style-type: none;
       padding-left: 0;
     }
 
     .searchingCont {
-      grid-area: searchbar;
       height: 30px;
       width: 800px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 0;
+      margin-bottom: 0;
+      grid-area: searchbar;
     }
 
     .searchB {
@@ -215,11 +220,11 @@
 
     #sent {
       margin-top: 0;
-      grid-area: sentmessages;
+      grid-area: sent;
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr;
-      align-items: end;
-      gap: 0 0;
+      grid-template-rows: 40px 1fr;
+      gap: 0;
       grid-template-areas: "searchbar""sentbar";
+      align-items: start;
     }
