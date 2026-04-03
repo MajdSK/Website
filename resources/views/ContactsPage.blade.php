@@ -55,18 +55,22 @@
         @if (count($text) && $text[0] != "no results found...")
           <h3 style="color: rgb(110,0,0)">your messages: </h3>
           <ul>
+            <?php  $a = 0; ?>
             @foreach ($text as $message)
-              <a href="editmessages/{{ $message->id }}" style="text-decoration: none;">
-                <li>
-                  {{ $message->id }}- {{ $message->MessageBody }}
-                  <span style="color: rgb(110,0,0,0.5); margin-left: 30px;">
-                    {{ $message->created_at }}
-                    @if($message->created_at != $message->updated_at)
-                      edited
-                    @endif
-                  </span>
+              @if($message->username === auth()->user()->name)
+                <li style="display: flex; justify-content: space-between;">
+                  <a id="a{{ $message->id }}" href="/editmessages/{{ $message->id }}" style="text-decoration: none;">
+                    {{ ++$a }}- {{ $message->MessageBody }}
+                    <span style="color: rgb(110,0,0,0.5); margin-left: 30px;">
+                      {{ $message->created_at }}
+                      @if($message->created_at != $message->updated_at)
+                        edited
+                      @endif
+                    </span>
+                  </a>
+                  <button id="delSingleMessage" form="deleteForm" value="{{ $message->id }}">X</button>
                 </li>
-              </a>
+              @endif
             @endforeach
           </ul>
         @elseif (!count($text))
@@ -77,6 +81,21 @@
       </div>
       <input class="delOld button" name="delete" type="submit" value="Delete Old Messages">
     </form>
+    <form id="deleteForm" action="/ContactsPage/del" method="POST">
+      @csrf
+      @method('delete')
+      <textarea name="hidden2" id="hidden2" style="display: none;"></textarea>
+    </form>
+    <script>
+      const deleteButtons = document.querySelectorAll('#delSingleMessage');
+      const hiddenInput = document.getElementById('hidden2');
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          hiddenInput.value = this.value; // Set the hidden input value to the button's value
+          document.getElementById('deleteForm').submit(); // Submit the form
+        });
+      });
+    </script>
   </div>
-
 </x-layout>

@@ -5,6 +5,7 @@
     @csrf
     @method('PATCH')
     <div id="container">
+      {{ $message->MessageBody  }}
     </div>
     <textarea name="messageBody" style="display:none" id="messageBody"></textarea>
     <input class="button" type="submit" value="update">
@@ -21,7 +22,6 @@
         ]
       }
     });
-    quill.root.innerText = "{{ $message->MesssageBody }}";
     const form = document.getElementById('identifier');
     form.onsubmit = function () {
       const text = document.getElementById('messageBody');

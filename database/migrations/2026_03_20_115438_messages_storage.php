@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('texts', function(Blueprint $table){
             $table->id();
+            $table->string('username');
             $table->text('MessageBody');
             $table->timestamps();
         });

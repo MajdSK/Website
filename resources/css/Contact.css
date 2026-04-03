@@ -23,7 +23,7 @@
       z-index: 10000;
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
+      justify-content: start;
       width: 100vw;
       background-color: rgb(214, 236, 255, 0.3);
       border: 1px solid rgb(214, 236, 255);
@@ -47,7 +47,7 @@
       width: 100vw;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: start;
 
       div {
         display: flex;
@@ -61,6 +61,7 @@
         margin: 0;
         padding: 0;
         opacity: 0;
+        width: 60px;
         visibility: none;
         transition: opacity 1s, visibility 1s;
       }
@@ -181,16 +182,37 @@
       padding-left: 5px;
     }
 
-    #savedMessages li {
+    #savedMessages li, #savedMessages li a {
       color: rgb(110, 0, 0);
-      width: 900px;
+      width: 750px;
       white-space: normal;
       overflow-wrap: break-word;
       word-wrap: break-word;
       margin-left: 0;
-      margin-top: 0;
+      margin-top: 2px;
       list-style-type: none;
       padding-left: 0;
+      position: relative;
+    }
+
+    #savedMessages li a {
+      display: inline;
+      width: fit-content;
+    }
+
+    a:hover::before {
+      content: "click to edit";
+      font-size: 12px;
+      padding: 4px 2px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: rgb(214, 236, 255);
+      border-radius: 5px;
+      transition: all 0.5s ease;
+      position: absolute;
+      left: -60px;
+      top: -2px;
+      opacity: 1;
+      visibility: visible;
     }
 
     .searchingCont {
@@ -227,4 +249,46 @@
       gap: 0;
       grid-template-areas: "searchbar""sentbar";
       align-items: start;
+    }
+
+    #delSingleMessage {
+      background-color: rgb(110, 0, 0);
+      color: rgb(214, 236, 255);
+      font-size: 12px;
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+
+    #delSingleMessage:hover {
+      cursor: pointer;
+    }
+
+    #delSingleMessage:hover::after {
+      content: "click to delete";
+      font-size: 12px;
+      padding: 4px 2px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: rgb(214, 236, 255);
+      border-radius: 5px;
+      transition: all 0.5s ease;
+      position: absolute;
+      left: -80px;
+      top: -2px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #delSingleMessage:active {
+      background-color: rgb(190, 0, 0);
+    }
+
+    #bgMenu #navigation #auth-sign-log {
+      margin-left: auto;
+      margin-right: 30px;
+      display: flex;
+      gap: 20px;
+
     }

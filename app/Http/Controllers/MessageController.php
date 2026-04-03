@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\text;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -12,7 +13,10 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $ContactsPageData = /*session()->get('text',[]) / DB::table('text')->get()*/ text::all();
+        $ContactsPageData = /*session()->get('text',[]) / DB::table('text')->get()*/ text::where('username', Auth::user()->name??'guest')->get();
+        if(Auth::check()) return view('ContactsPage', [
+        "text" => ['no messages yet...'] 
+        ]);
         return view('ContactsPage', [
         "text" => $ContactsPageData 
         ]);
@@ -31,12 +35,14 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()) return redirect("/LogIn")->withErrors(['email' => 'you must be logged in to send messages']);
         $request->validate(['text'=> ['required','min:3']]);
     $ContactsPageData = request('text');
     //session()->push("text" , $ContactsPageData);
     //DB::table('text')->insert
     text::create([
-        'MessageBody' => $ContactsPageData
+        'MessageBody' => $ContactsPageData,
+        'username' => Auth::user()->name
     ]);
     return redirect("/ContactsPage");
     //$ContactsPage = Request::input('ContactsPage');
@@ -48,10 +54,12 @@ class MessageController extends Controller
      */
     public function search()
     {
+        if(!Auth::check()) return redirect("/LogIn")->withErrors(['email' => 'you must be logged in to view messages']);
         $searchResults = text::query()->when(request('searchbar'),function($query,$search){
         $query->whereRaw("LOWER(MessageBody) LIKE ?", '%'. strtolower($search).'%');
+        $query->where("username", Auth::user()->name);
         })->get();
-        return view("/ContactsPage",["text"=>(count($searchResults)>0)?$searchResults:["no results found..."]]);
+        return view("ContactsPage",["text"=>(count($searchResults)>0)?$searchResults:["no results found..."]]);
     }
 
     /**
@@ -59,7 +67,7 @@ class MessageController extends Controller
      */
     public function edit(text $text)
     {
-        return view("/editmessages",["message"=>$text]);
+        return view("editmessages",["message"=>$text]);
     }
 
     /**
@@ -79,7 +87,17 @@ class MessageController extends Controller
      */
     public function destroy()
     {
-        text::truncate();
+        if(!Auth::check()) return redirect("/LogIn")->withErrors(['email' => 'you must be logged in to delete messages']);
+        foreach(text::all() as $message)
+        if($message->username === Auth::user()->name)
+        $message->delete();
         return redirect("/ContactsPage");
     }
+    public function destroySingle()
+    {
+        $text = text::where('id', request('hidden2'))->first();
+        $text->delete();
+        return redirect("/ContactsPage");
+    }
+    
 }

@@ -85,6 +85,14 @@ body {
   transform: translateX(-50%);
 }
 
+#bgMenu #navigation #auth-sign-log {
+  margin-left: auto;
+  margin-right: 30px;
+  display: flex;
+  gap: 20px;
+
+}
+
 .ql-editor * {
   color: rgb(110, 0, 0);
 }

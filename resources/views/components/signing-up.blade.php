@@ -1,8 +1,7 @@
 @props([
   "title" => 'LARAVEL',
-  "stylingsheet" => 'resources/css/app.css',
-  "JSsheet" => "resources/js/app.js",
-  "user" => request("user")
+  "stylingsheet" => 'resources/css/SignUp.css',
+  "JSsheet" => "resources/js/app.js"
 ])
 
 <!DOCTYPE html>
@@ -45,19 +44,14 @@
                         <p>Contact me</p>
                     </div>
                     </a>
-                    <div id="auth-sign-log">
-                        @guest
-                            <a href="/LogIn">Log In</a>
-                            <a href="/SignUp">Sign Up</a>
-                        @endguest
-                        @auth
-                            <p style="display: block; opacity:1;">{{ auth()->user()->name }}</p>
-                            <a href="/LogOut">Logout</a>
-                        @endauth
-                    </div>
             </nav>
         </div>
     {{ $slot }}
+    @if($errors->has('email') || $errors->has("password")||$errors->has("name"))
+         <p style="color: rgb(255, 0, 0); font-size: 16px; margin-top: 5px; font-weight: 800; display:inline; position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);">
+          {{ $errors->first('email') }} {{ $errors->first('password') }} {{ $errors->first('name') }}
+        </p>
+      @endif
 </body>
 
 </html>
