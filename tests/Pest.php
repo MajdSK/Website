@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Pest\Expectation;
 use Tests\TestCase;
 
 /*
@@ -29,8 +30,8 @@ pest()->extend(TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function (): \Pest\Expectation {
-    /** @var \Pest\Expectation $this */
+expect()->extend('toBeOne', function (): Expectation {
+    /** @var Expectation $this */
     return $this->toBe(1);
 });
 

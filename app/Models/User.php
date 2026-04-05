@@ -33,9 +33,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    protected function casts(): Array
+
+    protected function casts(): array
     {
-        return[
+        return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];

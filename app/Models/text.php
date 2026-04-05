@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class text extends Model
 {
     protected $guarded = [];
-    protected $fillable = ["MessageBody", 'username'];
+
+    protected $fillable = ['MessageBody', 'username'];
 }
