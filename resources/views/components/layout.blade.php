@@ -11,11 +11,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>{{ $title }}</title>
 
   <!-- Fonts -->
-  @vite([$stylingsheet, $JSsheet])
+    @vite([$stylingsheet, $JSsheet])
+    <style>
+        .custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the trigger button */
+.drop-btn {
+  background-color: none; /* bg-base-200 equivalent */
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  padding: 0;
+  background-color: #820000; /* bg-base-100 equivalent */
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(214,236,255);
+  list-style: none;
+  margin: 0;
+}
+
+/* dropdown-left logic: place to the left of the button */
+.dropdown-left .dropdown-content {
+  top: 0;
+  right: 100%; /* Positions the menu to the left of the container */
+  margin-right: 0.5rem; /* Spacing between button and menu */
+}
+
+/* Show the menu when the button is focused */
+.custom-dropdown .drop-btn:focus + .dropdown-content,
+.custom-dropdown:focus-within .dropdown-content {
+  display: block;
+}
+
+/* Menu item styling */
+.dropdown-content li, .dropdown-content li a {
+    display: block;
+    padding: 2px 0 2px 5px;
+    height:50px;
+    text-align: start;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-justify: newspaper;
+    text-decoration: none;
+    color: rgba(214,236,255);
+    border-radius: 0.375rem;
+}
+
+.dropdown-content a:hover {
+  background-color: #9D0000;
+}
+    </style>
 </head>
 
 <body>
@@ -51,7 +107,20 @@
                             <a href="/SignUp">Sign Up</a>
                         @endguest
                         @auth
-                            <p style="display: block; opacity:1;">{{ auth()->user()->name }}</p>
+                            <div class="custom-dropdown dropdown-left">
+                            <div tabindex="0" role="button" class="drop-btn">{{ auth()->user()->name }}</div>
+                            <ul tabindex="0" class="dropdown-content">
+                                @if (auth()->user()->notifications->count() > 0)
+                                    @foreach ( auth()->user()->notifications as $notification )
+                                        <li><a href="/editmessages/{{ $notification->data["message_id"] }}">{{ $notification->data["message"] }}
+                                        <br>click to edit your message
+                                    </a></li>
+                                    @endforeach
+                                @else
+                                    <li>No notifications</li>
+                                @endif
+                            </ul>
+                            </div>
                             <a href="/LogOut">Logout</a>
                         @endauth
                     </div>

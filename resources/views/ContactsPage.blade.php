@@ -57,20 +57,18 @@
           <ul>
             <?php  $a = 0; ?>
             @foreach ($text as $message)
-              @if($message->username === auth()->user()->name)
-                <li style="display: flex; justify-content: space-between;">
-                  <a id="a{{ $message->id }}" href="/editmessages/{{ $message->id }}" style="text-decoration: none;">
-                    {{ ++$a }}- {{ $message->MessageBody }}
-                    <span style="color: rgb(110,0,0,0.5); margin-left: 30px;">
-                      {{ $message->created_at }}
-                      @if($message->created_at != $message->updated_at)
-                        edited
-                      @endif
-                    </span>
-                  </a>
-                  <button id="delSingleMessage" form="deleteForm" value="{{ $message->id }}">X</button>
-                </li>
-              @endif
+              <li style="display: flex; justify-content: space-between;">
+                <a id="a{{ $message->id }}" href="/editmessages/{{ $message->id }}" style="text-decoration: none;">
+                  {{ ++$a }}- {{ $message->MessageBody }}
+                  <span style="color: rgb(110,0,0,0.5); margin-left: 30px;">
+                    {{ $message->created_at }}
+                    @if($message->created_at != $message->updated_at)
+                      edited
+                    @endif
+                  </span>
+                </a>
+                <button id="delSingleMessage" form="deleteForm" value="{{ $message->id }}">X</button>
+              </li>
             @endforeach
           </ul>
         @elseif (!count($text))

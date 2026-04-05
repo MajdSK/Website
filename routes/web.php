@@ -22,8 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::get("ContactsPage" , [MessageController::class, 'index']);
     Route::post("ContactsPage", [MessageController::class, "store"]);
     Route::delete("/ContactsPage", [MessageController::class, "destroy"]);
-    Route::patch("/editmessages/{text}", [MessageController::class, "update"]);
-    Route::get("/editmessages/{text}",[MessageController::class, 'edit']);
+    Route::patch("/editmessages/{text}", [MessageController::class, "update"])->can('edit', 'text');
+    Route::get("/editmessages/{text}",[MessageController::class, 'edit'])->can('edit', 'text');
     Route::get("/ContactsPage/search",[MessageController::class, 'search']);
     Route::delete("/ContactsPage/del", [MessageController::class, "destroySingle"]);
     
